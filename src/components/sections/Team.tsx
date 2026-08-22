@@ -46,8 +46,10 @@ export default function Team() {
             Ayhem &amp; Patrick
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/60">
-            Two owners who show up on-site, not just in the office. Heights
-            Yard Solutions is built on doing the work right, together.
+            A hardworking team that shows up on time, every time, and works
+            to the schedule we set with you. Heights Yard Solutions is
+            built on reliability and craftsmanship — turning your vision
+            for your property into something real.
           </p>
         </motion.div>
 

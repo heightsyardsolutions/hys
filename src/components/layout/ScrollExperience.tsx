@@ -7,6 +7,7 @@ import { panels, type PanelId } from "@/lib/panels";
 import { site } from "@/lib/site";
 import { ScrollExperienceContext } from "@/lib/scroll-context";
 import Hero from "@/components/sections/Hero";
+import ProjectShowcase from "@/components/sections/ProjectShowcase";
 import Team from "@/components/sections/Team";
 import Services from "@/components/sections/Services";
 import ProjectServices from "@/components/sections/ProjectServices";
@@ -16,6 +17,7 @@ import FloatingCallButton from "@/components/layout/FloatingCallButton";
 
 const PANEL_COMPONENTS = [
   Hero,
+  ProjectShowcase,
   Team,
   Services,
   ProjectServices,
@@ -118,7 +120,7 @@ export default function ScrollExperience() {
           />
         </button>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-5 xl:flex">
           {panels.map((panel) => (
             <button
               key={panel.id}

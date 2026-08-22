@@ -38,6 +38,21 @@ export const projectServices = [
   "Overgrown Weed Trimming/Demolition",
 ] as const;
 
+const showcaseCaptions = [
+  "Foundation Bed Refresh",
+  "Porch Bed & Border Upgrade",
+  "Evergreen Bed Cleanup",
+  "Shade Tree Bed Refresh",
+  "Post Ring Upgrade",
+  "Tree Ring Installation",
+];
+
+export const projectShowcase = [1, 2, 3, 4, 5, 6].map((n) => ({
+  before: `/images/projects/before-${n}.jpg`,
+  after: `/images/projects/after-${n}.jpg`,
+  caption: showcaseCaptions[n - 1],
+}));
+
 export const estimateCategoryGroups = [
   {
     label: "Lawn Care Services",

@@ -1,5 +1,6 @@
 export const panels = [
   { id: "home", label: "Home" },
+  { id: "gallery", label: "Gallery" },
   { id: "team", label: "Team" },
   { id: "services", label: "Services" },
   { id: "projects", label: "Projects" },

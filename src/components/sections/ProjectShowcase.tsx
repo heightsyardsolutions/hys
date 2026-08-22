@@ -43,8 +43,11 @@ export default function ProjectShowcase() {
             Before &amp; After
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/60">
-            A flowerbed cleanup and mulch install from one of our recent
-            jobs — see the transformation for yourself.
+            Real work from one of our recent jobs — beds releveled with new
+            brick edging, landscape fabric underneath to keep weeds from
+            coming back, and Starlite black rock throughout. We also
+            releveled the tree ring and built a small matching bed around
+            the light pole.
           </p>
         </motion.div>
 

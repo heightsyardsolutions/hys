@@ -10,7 +10,6 @@ import Hero from "@/components/sections/Hero";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
 import Team from "@/components/sections/Team";
 import Services from "@/components/sections/Services";
-import ProjectServices from "@/components/sections/ProjectServices";
 import EstimateForm from "@/components/sections/EstimateForm";
 import ReviewCTA from "@/components/sections/ReviewCTA";
 import Contact from "@/components/sections/Contact";
@@ -21,7 +20,6 @@ const PANEL_COMPONENTS = [
   ProjectShowcase,
   Team,
   Services,
-  ProjectServices,
   EstimateForm,
   ReviewCTA,
   Contact,

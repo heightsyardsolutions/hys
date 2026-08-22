@@ -1,7 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { coreServices } from "@/lib/site";
+import { serviceCategories } from "@/lib/site";
+import {
+  LawnmowerIcon,
+  ShovelIcon,
+  WeedRemovalIcon,
+  RakeIcon,
+} from "@/components/icons/ServiceIcons";
+
+const categoryIcons: Record<string, (props: { className?: string }) => JSX.Element> = {
+  Lawncare: LawnmowerIcon,
+  Landscaping: ShovelIcon,
+  "Overgrown Removal & Demolition": WeedRemovalIcon,
+  "Yard Cleanup": RakeIcon,
+};
 
 const container = {
   hidden: {},
@@ -27,8 +40,12 @@ export default function Services() {
             What We Do
           </p>
           <h2 className="max-w-2xl font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-white sm:text-5xl">
-            Core Services
+            Our Services
           </h2>
+          <p className="mt-5 max-w-xl text-white/60">
+            Everything we offer, from weekly lawn care to full property
+            overhauls — quoted in person, no surprises.
+          </p>
         </motion.div>
 
         <motion.div
@@ -36,27 +53,30 @@ export default function Services() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 grid grid-cols-1 gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2"
         >
-          {coreServices.map((service, i) => (
-            <motion.div
-              key={service.name}
-              variants={item}
-              className="group flex flex-col justify-between bg-ink p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-ink-800"
-            >
-              <span className="font-heading text-sm font-semibold text-volt">
-                0{i + 1}
-              </span>
-              <div className="mt-8">
-                <h3 className="font-heading text-2xl font-semibold uppercase tracking-tight text-white">
-                  {service.name}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/60">
-                  {service.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          {serviceCategories.map((category) => {
+            const Icon = categoryIcons[category.name];
+            return (
+              <motion.div
+                key={category.name}
+                variants={item}
+                className="group flex items-start gap-5 bg-ink p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-ink-800"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center border border-volt/30 bg-volt/[0.06] text-volt transition-colors duration-300 group-hover:bg-volt/10">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 className="font-heading text-2xl font-semibold uppercase tracking-tight text-white">
+                    {category.name}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">
+                    {category.items.join(", ")}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         <motion.p
@@ -66,8 +86,8 @@ export default function Services() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-8 text-sm text-white/50"
         >
-          Looking for hardscaping or a bigger project? Reach out and we&apos;ll
-          scope it in person.
+          Don&apos;t see your project listed? Reach out and we&apos;ll scope
+          it in person.
         </motion.p>
       </div>
     </section>

@@ -5,40 +5,34 @@ export const site = {
   instagramHandle: "@heightsyardsolutions",
   instagramUrl: "https://instagram.com/heightsyardsolutions",
   serviceArea: "Dearborn Heights & Surrounding Cities",
-  googleReviewUrl: "https://share.google/nLPO55XwhY9Ka16JH",
+  googleReviewUrl:
+    "https://search.google.com/local/writereview?placeid=ChIJ1_8NL-n7x0ERYk2w8cU36NY&source=g.page.m.i.a._&laa=nmx-review-solicitation-ia2",
   yelpReviewUrl:
     "https://www.yelp.com/writeareview/biz/yKT2s0HIclY0Z843l0yj0Q?return_url=%2Fbiz%2FyKT2s0HIclY0Z843l0yj0Q&review_origin=biz-details-war-button",
 };
 
-export const coreServices = [
+export const serviceCategories = [
   {
-    name: "Lawn Care",
-    description:
-      "Weekly mowing, edging, and trimming to keep your grass sharp and consistent all season.",
+    name: "Lawncare",
+    items: ["Mow", "Edge", "Blow"],
   },
   {
     name: "Landscaping",
-    description:
-      "Bed design and installation — plants, shrubs, and clean lines that reshape your property.",
+    items: [
+      "Walkway Installation",
+      "Solar Lighting Installation",
+      "New Rock Installation",
+      "Outdoor Custom Firepits Installation",
+    ],
   },
   {
-    name: "Mulching",
-    description:
-      "Fresh mulch installs that lock in a crisp, defined look and protect your beds.",
+    name: "Overgrown Removal & Demolition",
+    items: ["Weeds", "Brush", "Small Trees", "Flower Bed Cleanups"],
   },
   {
-    name: "Cleanups",
-    description:
-      "Spring and fall cleanups — leaves, debris, and overgrowth cleared out fast.",
+    name: "Yard Cleanup",
+    items: ["Raking", "Leaf Shredding", "Blowing"],
   },
-] as const;
-
-export const projectServices = [
-  "Bricklaying",
-  "Garden Bed Installation",
-  "Hedge Trimming/Brush Trimming & Demolition",
-  "Yard Leveling & Grading",
-  "Overgrown Weed Trimming/Demolition",
 ] as const;
 
 const showcaseCaptions = [
@@ -57,16 +51,12 @@ export const projectShowcase = [1, 2, 3, 4, 5, 6].map((n) => ({
 }));
 
 export const estimateCategoryGroups = [
-  {
-    label: "Lawn Care Services",
-    options: coreServices.map((s) => s.name),
-  },
-  {
-    label: "Project & Hardscape Services",
-    options: [...projectServices],
-  },
+  ...serviceCategories.map((category) => ({
+    label: category.name,
+    options: [...category.items],
+  })),
   {
     label: "Other",
-    options: ["Custom Outdoor Living (Coming Soon)", "Not Sure / Other"],
+    options: ["Have Your Own Project? We'll Measure & Quote It"],
   },
 ] as const;

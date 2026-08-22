@@ -39,12 +39,12 @@ export const projectServices = [
 ] as const;
 
 const showcaseCaptions = [
-  "Foundation Bed Refresh",
-  "Porch Bed & Border Upgrade",
-  "Evergreen Bed Cleanup",
-  "Shade Tree Bed Refresh",
-  "Post Ring Upgrade",
-  "Tree Ring Installation",
+  "Foundation Bed — Releveled with New Brick & Starlite Black Rock",
+  "Porch Bed — Releveled with New Brick & Starlite Black Rock",
+  "Evergreen Bed — Releveled with New Brick & Starlite Black Rock",
+  "Flower Bed — Releveled with New Brick & Starlite Black Rock",
+  "Light Pole Upgrade — New Brick & Starlite Black Rock",
+  "Tree Ring Rebuild — Regraded with Fill Dirt & New Brick",
 ];
 
 export const projectShowcase = [1, 2, 3, 4, 5, 6].map((n) => ({

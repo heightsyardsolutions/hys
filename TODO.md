@@ -7,6 +7,11 @@ Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion + Lenis
 (Ayhem & Patrick, co-owners). Repo: https://github.com/heightsyardsolutions/hys
 (pushed to `main`, up to date as of this file).
 
+**Live**: https://www.heightsyardsolutions.com — connected to Vercel,
+auto-deploys from `main` on push. Verified (2026-08-22) that the live site
+is current with the latest commit (confirmed "Lawncare"/"Ayhem" content
+present in the deployed HTML).
+
 Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 `.claude/launch.json` port assumption — 3010 was just what this session used).
 
@@ -34,10 +39,13 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   user's request).
 - **Services**: single unified catalog, 4 categories (Lawncare,
   Landscaping, Overgrown Removal & Demolition, Yard Cleanup), each with an
-  icon + comma-separated sub-service list. Source of truth is
-  `serviceCategories` in `src/lib/site.ts` — the estimate form's category
-  dropdown (`estimateCategoryGroups`, also in `site.ts`) is derived from
-  it, so adding/renaming a service only needs one edit.
+  icon + a full descriptive sentence (not just a bare item list). Source
+  of truth is `serviceCategories` in `src/lib/site.ts` — each entry has
+  both `description` (shown on the card) and `items` (the flat list the
+  estimate form's category dropdown, `estimateCategoryGroups`, is derived
+  from) — so adding/renaming a service only needs one edit, but if you
+  add an item make sure it's reflected in the description text too since
+  those aren't auto-generated from each other.
 - **Estimate form** (`EstimateFormFields.tsx`, used by both the hero card
   and the full `EstimateForm` section): name, phone, optional email,
   category select, optional measurements (for linear-foot-priced work),
@@ -57,29 +65,29 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 
 ## Needs attention / half-done
 
-1. **No live deployment.** The site only exists as a local dev server and
-   a GitHub repo — there is no public URL yet. Highest-priority next step.
-2. **Estimate form has no real backend.** Both the hero card and the full
+1. **Estimate form has no real backend.** Both the hero card and the full
    form build a `mailto:` link and redirect the visitor's browser to it.
    This depends on the visitor having an email client configured on
    their device — it will silently fail to feel "sent" for anyone who
    doesn't (e.g., someone on a work computer with no mail app set up).
    Needs a real form backend (Formspree, or a small serverless
    function + email service like Resend) before this is production-ready.
-3. **Commercial email is a placeholder** ("Coming Soon", no address) —
+2. **Commercial email is a placeholder** ("Coming Soon", no address) —
    business hasn't set one up yet. Swap in when they have it
    (`src/components/sections/Contact.tsx`, the second email row).
-4. **No SEO pass beyond basics.** Only a title + meta description exist
+3. **No SEO pass beyond basics.** Only a title + meta description exist
    (`src/app/layout.tsx`). No sitemap.xml, no robots.txt, no
    Open Graph/Twitter card images, no structured data (LocalBusiness
-   schema would help a landscaping business a lot in local search).
-5. **No analytics.** Nothing tracks form submissions, button clicks, or
-   traffic yet (no GA4, no Meta Pixel, nothing).
-6. **Mobile nav has no menu.** Below the `xl` breakpoint the nav links
+   schema would help a landscaping business a lot in local search,
+   especially now that there's a real domain live).
+4. **No analytics.** Nothing tracks form submissions, button clicks, or
+   traffic yet (no GA4, no Meta Pixel, nothing) — worth adding now that
+   the site is publicly reachable at heightsyardsolutions.com.
+5. **Mobile nav has no menu.** Below the `xl` breakpoint the nav links
    just disappear (only logo + phone + Estimate button remain) — there's
    no hamburger/drawer. Relies on the floating call button + normal
    scroll to reach everything. Works, but is a known simplification.
-7. **Scope note on fire pits**: "Outdoor Custom Firepits Installation" is
+6. **Scope note on fire pits**: "Outdoor Custom Firepits Installation" is
    now listed as a normal Landscaping sub-service (per the user's latest
    instruction), but earlier in the project it was explicitly a
    "Coming Soon" item because they had no completed fire pit project yet.
@@ -88,16 +96,16 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 
 ## Next 3 steps (recommended)
 
-1. **Deploy to Vercel** (or similar) and get a real public URL. This repo
-   is a stock Next.js app — should be a near-zero-config Vercel import.
-   Confirm the custom domain situation with the user (do they own a
-   domain yet?).
-2. **Replace the `mailto:` estimate form with a real backend.** Formspree
-   is the fastest path (no server code needed, just point the form at a
+1. **Replace the `mailto:` estimate form with a real backend.** Site is
+   live on a real domain now, so this is the top priority — Formspree is
+   the fastest path (no server code needed, just point the form at a
    Formspree endpoint); a Next.js API route + Resend/SendGrid is the more
    "own it" path if the user wants emails to look fully branded. Either
    way, keep the current UI/validation as-is — just swap the submit
    handler in `EstimateFormFields.tsx`.
+2. **Add basic SEO + analytics** now that the site is publicly reachable:
+   sitemap.xml, robots.txt, Open Graph image, LocalBusiness structured
+   data, and at least one analytics tool (GA4 is the default choice).
 3. **Get final business details from the user**: commercial email address
    (or confirm it's staying "Coming Soon" for now), confirm the fire-pit
    scope question above, and ask whether they want any of their existing

@@ -71,7 +71,7 @@ export default function Services() {
                     {category.name}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/60">
-                    {category.items.join(", ")}
+                    {category.description}
                   </p>
                 </div>
               </motion.div>

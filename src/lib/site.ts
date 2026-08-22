@@ -14,10 +14,14 @@ export const site = {
 export const serviceCategories = [
   {
     name: "Lawncare",
+    description:
+      "Weekly mowing on a schedule you can count on, precise edging along walkways and beds, and a full blow-down when we're done — so your lawn stays sharp and consistent all season, not just after we leave.",
     items: ["Mow", "Edge", "Blow"],
   },
   {
     name: "Landscaping",
+    description:
+      "From walkway installation and solar lighting to fresh rock beds and custom outdoor fire pits, we handle the bigger installs that actually reshape how your property looks and lives.",
     items: [
       "Walkway Installation",
       "Solar Lighting Installation",
@@ -27,10 +31,14 @@ export const serviceCategories = [
   },
   {
     name: "Overgrown Removal & Demolition",
+    description:
+      "Weeds, brush, small trees, and flower beds nobody's touched in years — cleared out and hauled away so the property looks cared for again instead of forgotten.",
     items: ["Weeds", "Brush", "Small Trees", "Flower Bed Cleanups"],
   },
   {
     name: "Yard Cleanup",
+    description:
+      "Seasonal raking, leaf shredding, and a thorough blow-out to clear everything else behind — the difference between a yard that's mowed and a yard that actually looks finished.",
     items: ["Raking", "Leaf Shredding", "Blowing"],
   },
 ] as const;

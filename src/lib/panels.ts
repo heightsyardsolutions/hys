@@ -5,6 +5,7 @@ export const panels = [
   { id: "services", label: "Services" },
   { id: "projects", label: "Projects" },
   { id: "estimate", label: "Estimate" },
+  { id: "reviews", label: "Reviews" },
   { id: "contact", label: "Contact" },
 ] as const;
 

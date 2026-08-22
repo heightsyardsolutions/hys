@@ -5,6 +5,7 @@ export const site = {
   instagramHandle: "@heightsyardsolutions",
   instagramUrl: "https://instagram.com/heightsyardsolutions",
   serviceArea: "Dearborn Heights & Surrounding Cities",
+  googleReviewUrl: "https://share.google/nLPO55XwhY9Ka16JH",
 };
 
 export const coreServices = [

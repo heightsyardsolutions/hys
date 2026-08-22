@@ -12,6 +12,7 @@ import Team from "@/components/sections/Team";
 import Services from "@/components/sections/Services";
 import ProjectServices from "@/components/sections/ProjectServices";
 import EstimateForm from "@/components/sections/EstimateForm";
+import ReviewCTA from "@/components/sections/ReviewCTA";
 import Contact from "@/components/sections/Contact";
 import FloatingCallButton from "@/components/layout/FloatingCallButton";
 
@@ -22,6 +23,7 @@ const PANEL_COMPONENTS = [
   Services,
   ProjectServices,
   EstimateForm,
+  ReviewCTA,
   Contact,
 ];
 
@@ -116,7 +118,7 @@ export default function ScrollExperience() {
             width={295}
             height={162}
             priority
-            className="h-10 w-auto sm:h-12"
+            className="h-12 w-auto sm:h-14"
           />
         </button>
 

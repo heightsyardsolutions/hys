@@ -31,9 +31,8 @@ export default function Contact() {
               Let&apos;s Connect
             </h2>
             <p className="mt-5 max-w-md text-white/60">
-              Call us for the fastest response. For commercial or larger
-              inquiries, email works too — every job is still quoted in
-              person.
+              Call us for the fastest response, or email for residential
+              inquiries — every job is still quoted in person.
             </p>
             <p className="mt-8 flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-white/50">
               <span className="h-1.5 w-1.5 rounded-full bg-volt" />
@@ -68,12 +67,25 @@ export default function Contact() {
             >
               <span className="font-heading text-sm font-semibold uppercase tracking-widest text-white/50">
                 Email
-                <span className="ml-2 text-white/30">(Commercial)</span>
+                <span className="ml-2 text-white/30">(Residential)</span>
               </span>
               <span className="font-heading text-lg font-semibold text-white transition-colors group-hover:text-volt sm:text-xl">
                 {site.email}
               </span>
             </motion.a>
+
+            <motion.div
+              variants={item}
+              className="flex items-baseline justify-between border-b border-white/10 pb-5"
+            >
+              <span className="font-heading text-sm font-semibold uppercase tracking-widest text-white/50">
+                Email
+                <span className="ml-2 text-white/30">(Commercial)</span>
+              </span>
+              <span className="font-heading text-lg font-semibold text-white/40 sm:text-xl">
+                Coming Soon
+              </span>
+            </motion.div>
 
             <motion.a
               variants={item}

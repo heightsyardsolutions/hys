@@ -6,6 +6,8 @@ export const site = {
   instagramUrl: "https://instagram.com/heightsyardsolutions",
   serviceArea: "Dearborn Heights & Surrounding Cities",
   googleReviewUrl: "https://share.google/nLPO55XwhY9Ka16JH",
+  yelpReviewUrl:
+    "https://www.yelp.com/writeareview/biz/yKT2s0HIclY0Z843l0yj0Q?return_url=%2Fbiz%2FyKT2s0HIclY0Z843l0yj0Q&review_origin=biz-details-war-button",
 };
 
 export const coreServices = [

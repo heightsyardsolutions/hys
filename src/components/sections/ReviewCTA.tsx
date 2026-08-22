@@ -35,24 +35,41 @@ export default function ReviewCTA() {
         </h2>
         <p className="mx-auto mt-5 max-w-md text-white/60">
           If we&apos;ve worked on your property, we&apos;d love to hear about
-          it. A quick review on Google helps other homeowners in the area
-          find us — and helps us keep raising the bar.
+          it. A quick review on Google or Yelp helps other homeowners in the
+          area find us — and helps us keep raising the bar.
         </p>
 
-        <a
-          href={site.googleReviewUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mt-8 inline-flex items-center gap-3 bg-volt px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98]"
-        >
-          Leave a Google Review
-          <span
-            aria-hidden="true"
-            className="transition-transform group-hover:translate-x-1"
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href={site.googleReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 bg-volt px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98]"
           >
-            &rarr;
-          </span>
-        </a>
+            Google Review
+            <span
+              aria-hidden="true"
+              className="transition-transform group-hover:translate-x-1"
+            >
+              &rarr;
+            </span>
+          </a>
+
+          <a
+            href={site.yelpReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 border border-white/20 px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:border-volt hover:text-volt active:scale-[0.98]"
+          >
+            Yelp Review
+            <span
+              aria-hidden="true"
+              className="transition-transform group-hover:translate-x-1"
+            >
+              &rarr;
+            </span>
+          </a>
+        </div>
       </motion.div>
     </section>
   );

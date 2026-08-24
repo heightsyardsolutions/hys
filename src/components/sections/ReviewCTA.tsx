@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { site } from "@/lib/site";
+import { site, customerReviews } from "@/lib/site";
 
 function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -11,66 +11,126 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export default function ReviewCTA() {
   return (
     <section className="flex min-h-[100svh] w-full flex-col justify-center border-t border-white/10 bg-ink px-6 py-24 sm:px-10 lg:px-16">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="mx-auto w-full max-w-2xl border border-white/10 bg-ink-950 p-10 text-center sm:p-14"
-      >
-        <div className="flex justify-center gap-1.5 text-volt">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <StarIcon key={i} className="h-6 w-6" />
+      <div className="mx-auto w-full max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center"
+        >
+          <div className="flex justify-center gap-1.5 text-volt">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <StarIcon key={i} className="h-5 w-5" />
+            ))}
+          </div>
+          <p className="mt-4 font-heading text-sm font-semibold uppercase tracking-[0.3em] text-volt">
+            5-Star Rated
+          </p>
+          <h2 className="mx-auto max-w-2xl font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-white sm:text-5xl">
+            What Our Customers Say
+          </h2>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {customerReviews.map((review) => (
+            <motion.div
+              key={review.name}
+              variants={item}
+              className="flex flex-col border border-white/10 bg-ink-950 p-6 transition-colors duration-300 hover:border-volt/30"
+            >
+              <div className="flex gap-1 text-volt">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <StarIcon key={i} className="h-4 w-4" />
+                ))}
+              </div>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-white/70">
+                {review.text ? (
+                  <>&ldquo;{review.text}&rdquo;</>
+                ) : (
+                  <span className="italic text-white/40">
+                    Left a 5-star rating, no written review.
+                  </span>
+                )}
+              </p>
+              <p className="mt-5 font-heading text-sm font-semibold uppercase tracking-wide text-white">
+                {review.name}
+              </p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <p className="mt-6 font-heading text-sm font-semibold uppercase tracking-[0.3em] text-volt">
-          Love The Results?
-        </p>
-        <h2 className="mt-2 font-heading text-3xl font-bold uppercase leading-tight tracking-tight text-white sm:text-4xl">
-          Leave Us A Review
-        </h2>
-        <p className="mx-auto mt-5 max-w-md text-white/60">
-          If we&apos;ve worked on your property, we&apos;d love to hear about
-          it. A quick review on Google or Yelp helps other homeowners in the
-          area find us — and helps us keep raising the bar.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mx-auto mt-16 w-full max-w-2xl border border-white/10 bg-ink-950 p-10 text-center sm:p-12"
+        >
+          <p className="font-heading text-sm font-semibold uppercase tracking-[0.3em] text-volt">
+            Love The Results?
+          </p>
+          <h3 className="mt-2 font-heading text-2xl font-bold uppercase leading-tight tracking-tight text-white sm:text-3xl">
+            Leave Us A Review
+          </h3>
+          <p className="mx-auto mt-4 max-w-md text-white/60">
+            If we&apos;ve worked on your property, we&apos;d love to hear
+            about it. A quick review on Google or Yelp helps other
+            homeowners in the area find us.
+          </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href={site.googleReviewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 bg-volt px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98]"
-          >
-            Google Review
-            <span
-              aria-hidden="true"
-              className="transition-transform group-hover:translate-x-1"
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={site.googleReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 bg-volt px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98]"
             >
-              &rarr;
-            </span>
-          </a>
+              Google Review
+              <span
+                aria-hidden="true"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                &rarr;
+              </span>
+            </a>
 
-          <a
-            href={site.yelpReviewUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 border border-white/20 px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:border-volt hover:text-volt active:scale-[0.98]"
-          >
-            Yelp Review
-            <span
-              aria-hidden="true"
-              className="transition-transform group-hover:translate-x-1"
+            <a
+              href={site.yelpReviewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 border border-white/20 px-8 py-4 font-heading text-base font-semibold uppercase tracking-wide text-white transition-all hover:-translate-y-0.5 hover:border-volt hover:text-volt active:scale-[0.98]"
             >
-              &rarr;
-            </span>
-          </a>
-        </div>
-      </motion.div>
+              Yelp Review
+              <span
+                aria-hidden="true"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                &rarr;
+              </span>
+            </a>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

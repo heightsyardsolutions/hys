@@ -11,6 +11,37 @@ export const site = {
     "https://www.yelp.com/writeareview/biz/yKT2s0HIclY0Z843l0yj0Q?return_url=%2Fbiz%2FyKT2s0HIclY0Z843l0yj0Q&review_origin=biz-details-war-button",
 };
 
+export const customerReviews = [
+  {
+    name: "Rustam Sadiqi",
+    text: "Very well done! Very respectful people and took care of my front yard very well! I will definitely call them again for fixing the yards 💯!",
+  },
+  {
+    name: "Ali Al-Nidawi",
+    text: "Excellent service — the job was done in a timely and professional manner.",
+  },
+  {
+    name: "Umar B.",
+    text: "Top-notch service from Heights Yard Solutions! They were punctual, professional, and super polite. The lawn and edging look immaculate — you can tell they take real pride in their work. I'll definitely be using them again!",
+  },
+  {
+    name: "Batool Alibrahim",
+    text: "Their work is excellent and neat.",
+  },
+  {
+    name: "McKayla Scott",
+    text: "Solid landscaping crew. They showed up, put in the work, and got the job done exactly like they were supposed to. My yard looks good and clean. No complaints at all, I'd definitely use them again.",
+  },
+  {
+    name: "Ahmed Ramouni",
+    text: "Great service! They did an excellent job cutting my lawn, were quick and professional, and left everything looking clean. Highly recommend!",
+  },
+  {
+    name: "Adam Moha",
+    text: null,
+  },
+] as const;
+
 export const serviceCategories = [
   {
     name: "Lawncare",

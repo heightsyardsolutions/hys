@@ -92,7 +92,7 @@ export const projects = [
   },
   {
     title: "Garden Flower Bed Installation — Marble White Rock & Rubber Mulch",
-    pairs: [1, 2, 3, 4].map((n) => ({
+    pairs: [1, 2, 3, 4, 5].map((n) => ({
       before: `/images/projects/project-2/before-${n}.jpg`,
       after: `/images/projects/project-2/after-${n}.jpg`,
       caption: [
@@ -100,6 +100,7 @@ export const projects = [
         "Walkway Bed — Marble White Rock & Rubber Mulch",
         "Evergreen Bed — Marble White Rock Install",
         "Porch Bed — Marble White Rock Install",
+        "Arborvitae Bed — Marble White Rock Install",
       ][n - 1],
     })),
   },

@@ -19,7 +19,9 @@ export default function EstimateFormFields({
 }: {
   compact?: boolean;
 }) {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">(
+    "idle",
+  );
 
   const fieldLabel = compact
     ? "block font-heading text-[10px] font-semibold uppercase tracking-widest text-white/50"
@@ -29,35 +31,34 @@ export default function EstimateFormFields({
     : "mt-2 w-full border border-white/15 bg-ink px-4 py-3 text-white placeholder-white/30 outline-none transition-colors focus:border-volt";
   const spacing = compact ? "space-y-4" : "space-y-6";
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
 
-    const name = form.get("name")?.toString().trim() ?? "";
-    const phone = form.get("phone")?.toString().trim() ?? "";
-    const email = form.get("email")?.toString().trim() ?? "";
-    const category = form.get("category")?.toString() ?? "";
-    const measurements = form.get("measurements")?.toString().trim() ?? "";
-    const details = form.get("details")?.toString().trim() ?? "";
+    const payload = {
+      name: form.get("name")?.toString().trim() ?? "",
+      phone: form.get("phone")?.toString().trim() ?? "",
+      email: form.get("email")?.toString().trim() ?? "",
+      category: form.get("category")?.toString() ?? "",
+      measurements: form.get("measurements")?.toString().trim() ?? "",
+      details: form.get("details")?.toString().trim() ?? "",
+      website: form.get("website")?.toString() ?? "", // honeypot
+    };
 
-    const bodyLines = [
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      email && `Email: ${email}`,
-      `Project Category: ${category}`,
-      measurements && `Approximate Measurements: ${measurements}`,
-      "",
-      "Project Details:",
-      details,
-    ].filter(Boolean);
+    setStatus("loading");
 
-    const subject = encodeURIComponent(
-      `Estimate Request — ${category || "General"}`,
-    );
-    const body = encodeURIComponent(bodyLines.join("\n"));
+    try {
+      const res = await fetch("/api/estimate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-    setStatus("sent");
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "sent") {
@@ -68,12 +69,12 @@ export default function EstimateFormFields({
         className={`border border-volt/40 bg-volt/[0.06] ${compact ? "p-5" : "p-8"}`}
       >
         <p className="font-heading text-base font-semibold uppercase tracking-wide text-volt sm:text-lg">
-          Opening your email
+          Request Sent
         </p>
         <p className="mt-2 text-sm text-white/70 sm:text-base">
-          We&apos;ve opened a message to {site.email} with your details
-          filled in — just hit send. If nothing opened, email us directly or
-          call {site.phoneDisplay}.
+          Thanks — we&apos;ve got your details and will follow up to
+          schedule your walkthrough. Need us sooner? Call{" "}
+          {site.phoneDisplay}.
         </p>
       </motion.div>
     );
@@ -88,6 +89,15 @@ export default function EstimateFormFields({
       onSubmit={handleSubmit}
       className={spacing}
     >
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
+
       <motion.div variants={item} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label>
           <span className={fieldLabel}>Name</span>
@@ -177,18 +187,28 @@ export default function EstimateFormFields({
       <motion.div variants={item}>
         <button
           type="submit"
-          className={`group inline-flex w-full items-center justify-center gap-3 bg-volt font-heading font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98] sm:w-auto ${
+          disabled={status === "loading"}
+          className={`group inline-flex w-full items-center justify-center gap-3 bg-volt font-heading font-semibold uppercase tracking-wide text-ink shadow-volt-sm transition-all hover:shadow-volt hover:-translate-y-0.5 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-volt-sm sm:w-auto ${
             compact ? "px-6 py-3 text-sm" : "px-8 py-4 text-base"
           }`}
         >
-          Submit Request
-          <span
-            aria-hidden="true"
-            className="transition-transform group-hover:translate-x-1"
-          >
-            &rarr;
-          </span>
+          {status === "loading" ? "Sending..." : "Submit Request"}
+          {status !== "loading" && (
+            <span
+              aria-hidden="true"
+              className="transition-transform group-hover:translate-x-1"
+            >
+              &rarr;
+            </span>
+          )}
         </button>
+
+        {status === "error" && (
+          <p className="mt-3 text-sm text-red-400">
+            Something went wrong sending your request. Please try again, or
+            call us directly at {site.phoneDisplay}.
+          </p>
+        )}
       </motion.div>
     </motion.form>
   );

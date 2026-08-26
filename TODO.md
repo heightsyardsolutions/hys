@@ -1,6 +1,6 @@
 # Heights Yard Solutions — Project Status
 
-Last updated: 2026-08-22
+Last updated: 2026-08-25
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion + Lenis
 (smooth scroll). Single-page marketing site for a landscaping business
@@ -28,12 +28,18 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Hero**: headline + subtext + CTA, parallax background image, and a
   compact "Get A Quote" form embedded top-right (same fields/logic as the
   full estimate form, via shared `EstimateFormFields.tsx`).
-- **Gallery**: before/after slideshow, 6 real photo pairs (processed from
-  full-res camera originals in `public/images/projects/`, correctly
-  rotated — see "Known quirks" below on why that took multiple passes).
-  Captions are specific per photo (bed releveling, brick edging, Starlite
-  black rock, tree ring regrade, light pole upgrade). Auto-advances every
-  5s, pauses on hover, dot/arrow nav.
+- **Gallery**: two separately titled projects ("Starlite Black Rock &
+  Slate Retaining Wall Revamp" — 6 pairs, and "Garden Flower Bed
+  Installation — Marble White Rock & Rubber Mulch" — 4 pairs), each in
+  its own subfolder under `public/images/projects/` (`project-1/`,
+  `project-2/`) and its own carousel with dots/arrows/auto-advance.
+  Comparison uses a real drag-to-reveal slider (`BeforeAfterSlider.tsx`
+  — native range input driving a `clip-path` on the before image), not
+  static side-by-side panels. Photos processed from full-res camera
+  originals with `sharp().rotate()` (auto-orient) — see "Known quirks"
+  below on why that took multiple passes the first time. Data lives in
+  `projects` in `src/lib/site.ts` — add a new project by adding photos
+  to a new `project-N/` folder and a new entry to that array.
 - **Team**: Ayhem & Patrick, hand-illustrated SVG avatars (not photos),
   short bios, framed as equal co-owners (no origin-story detail per the
   user's request).

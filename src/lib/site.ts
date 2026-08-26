@@ -76,16 +76,16 @@ export const serviceCategories = [
 
 export const projects = [
   {
-    title: "Starlite Black Rock & Slate Retaining Wall Revamp",
+    title: "Star Black Rock & Slate Retaining Wall Revamp",
     pairs: [1, 2, 3, 4, 5, 6].map((n) => ({
       before: `/images/projects/project-1/before-${n}.jpg`,
       after: `/images/projects/project-1/after-${n}.jpg`,
       caption: [
-        "Foundation Bed — Releveled with New Brick & Starlite Black Rock",
-        "Porch Bed — Releveled with New Brick & Starlite Black Rock",
-        "Evergreen Bed — Releveled with New Brick & Starlite Black Rock",
-        "Flower Bed — Releveled with New Brick & Starlite Black Rock",
-        "Light Pole Upgrade — New Brick & Starlite Black Rock",
+        "Foundation Bed — Releveled with New Brick & Star Black Rock",
+        "Porch Bed — Releveled with New Brick & Star Black Rock",
+        "Evergreen Bed — Releveled with New Brick & Star Black Rock",
+        "Flower Bed — Releveled with New Brick & Star Black Rock",
+        "Light Pole Upgrade — New Brick & Star Black Rock",
         "Tree Ring Rebuild — Regraded with Fill Dirt & New Brick",
       ][n - 1],
     })),

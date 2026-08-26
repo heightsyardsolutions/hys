@@ -33,10 +33,12 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   Installation — Marble White Rock & Rubber Mulch" — 4 pairs), each in
   its own subfolder under `public/images/projects/` (`project-1/`,
   `project-2/`) and its own carousel with dots/arrows/auto-advance.
-  Comparison uses a real drag-to-reveal slider (`BeforeAfterSlider.tsx`
-  — native range input driving a `clip-path` on the before image), not
-  static side-by-side panels. Photos processed from full-res camera
-  originals with `sharp().rotate()` (auto-orient) — see "Known quirks"
+  Comparison is side-by-side static photos (before, then after with a
+  2px accent-color border) — an interactive drag-to-reveal slider was
+  tried first but swapped back out since the target audience skews
+  older and side-by-side reads faster at a glance. Photos processed
+  from full-res camera originals with `sharp().rotate()` (auto-orient)
+  — see "Known quirks"
   below on why that took multiple passes the first time. Data lives in
   `projects` in `src/lib/site.ts` — add a new project by adding photos
   to a new `project-N/` folder and a new entry to that array.

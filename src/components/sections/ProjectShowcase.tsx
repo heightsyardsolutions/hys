@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { projects } from "@/lib/site";
-import BeforeAfterSlider from "@/components/sections/BeforeAfterSlider";
 
 type Project = (typeof projects)[number];
 
@@ -37,12 +37,52 @@ function ProjectCarousel({ project }: { project: Project }) {
         {project.title}
       </h3>
 
-      <div className="mt-6 mx-auto max-w-3xl">
-        <BeforeAfterSlider
-          before={current.before}
-          after={current.after}
-          caption={current.caption}
-        />
+      <div className="mt-6 mx-auto max-w-4xl">
+        <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`before-${project.title}-${index}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 bg-ink"
+            >
+              <Image
+                src={current.before}
+                alt={`${current.caption} — before, by Heights Yard Solutions`}
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <span className="absolute left-4 top-4 border border-white/30 bg-black/60 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
+                Before
+              </span>
+            </motion.div>
+          </AnimatePresence>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`after-${project.title}-${index}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut", delay: 0.08 }}
+              className="relative aspect-[4/3] w-full overflow-hidden border-2 border-volt bg-ink shadow-volt-sm"
+            >
+              <Image
+                src={current.after}
+                alt={`${current.caption} — after, by Heights Yard Solutions`}
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <span className="absolute left-4 top-4 border border-volt/60 bg-ink-950/80 px-3 py-1 font-heading text-xs font-semibold uppercase tracking-widest text-volt backdrop-blur-sm">
+                After
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         <AnimatePresence mode="wait">
           <motion.p
@@ -118,8 +158,8 @@ export default function ProjectShowcase() {
             Before &amp; After
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/60">
-            Drag the slider to see the transformation for yourself — real
-            jobs, straight from our crew.
+            Real jobs, straight from our crew — see the transformation for
+            yourself.
           </p>
         </motion.div>
 

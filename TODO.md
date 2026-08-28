@@ -33,7 +33,7 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Gallery**: three separately titled projects — "Star Black Rock &
   Slate Retaining Wall Revamp" (6 pairs), "Garden Flower Bed
   Installation — Marble White Rock & Rubber Mulch" (5 pairs), and
-  "Lawncare — Mow, Edge & Blow Service" (3 pairs) — each in its own
+  "Lawncare — Mow, Edge & Blow Service" (5 pairs) — each in its own
   subfolder under `public/images/projects/` (`project-1/`, `project-2/`,
   `project-3/`) and its own carousel with dots/arrows/auto-advance.
   For project-3, the source photos had no clean before/after numbering

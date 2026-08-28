@@ -30,12 +30,17 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Hero**: headline + subtext + CTA, parallax background image, and a
   compact "Get A Quote" form embedded top-right (same fields/logic as the
   full estimate form, via shared `EstimateFormFields.tsx`).
-- **Gallery**: three separately titled projects — "Star Black Rock &
+- **Gallery**: four separately titled projects — "Star Black Rock &
   Slate Retaining Wall Revamp" (6 pairs), "Garden Flower Bed
-  Installation — Marble White Rock & Rubber Mulch" (5 pairs), and
-  "Lawncare — Mow, Edge & Blow Service" (5 pairs) — each in its own
-  subfolder under `public/images/projects/` (`project-1/`, `project-2/`,
-  `project-3/`) and its own carousel with dots/arrows/auto-advance.
+  Installation — Marble White Rock & Rubber Mulch" (5 pairs),
+  "Lawncare — Mow, Edge & Blow Service" (3 pairs), and "Lawncare —
+  Mow, Edge & Flower Bed Trim" (2 pairs) — the two lawncare entries
+  are two different houses, both sourced from the same `project-3/`
+  photo folder (`projects` in `site.ts` just slices different `n`
+  ranges from the same folder into two entries — the folder itself
+  isn't split by house). Each project has its own carousel with
+  dots/arrows/auto-advance, in its own subfolder under
+  `public/images/projects/` (`project-1/`, `project-2/`, `project-3/`).
   For project-3, the source photos had no clean before/after numbering
   — pairing was determined by matching camera framing + cross-checking
   EXIF capture timestamps (paired shots taken seconds apart; before vs

@@ -30,23 +30,23 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Hero**: headline + subtext + CTA, parallax background image, and a
   compact "Get A Quote" form embedded top-right (same fields/logic as the
   full estimate form, via shared `EstimateFormFields.tsx`).
-- **Gallery**: three separately titled projects — "Star Black Rock &
+- **Gallery**: four separately titled projects — "Star Black Rock &
   Slate Retaining Wall Revamp" (6 pairs), "Garden Flower Bed
-  Installation — Marble White Rock & Rubber Mulch" (5 pairs), and
-  "Lawncare — Mow, Edge & Blow Service" (2 pairs, front + curb lawn
-  only). Each project has its own carousel with dots/arrows/
+  Installation — Marble White Rock & Rubber Mulch" (5 pairs),
+  "Lawncare — Mow, Edge & Blow Service" (2 pairs, front + curb lawn),
+  and "Lawncare — Mow, Edge & Flower Bed Trim" (2 pairs, a second
+  house). Each project has its own carousel with dots/arrows/
   auto-advance, in its own subfolder under `public/images/projects/`
-  (`project-1/`, `project-2/`, `project-3/`). Lawncare captions are
-  intentionally simple ("Lawncare — Mow, Edge & Blow" on every photo)
-  per the user's request — unlike the other two projects, don't add
-  descriptive per-photo captions here without being asked.
-  **A second lawncare house was built (3 more pairs, correctly
-  matched by EXIF timestamp + framing) then removed at the user's
-  request** — they want to swap in different photos for that slot.
-  If asked to add a second lawncare property, check whether they
-  still have `project-3/before-3..5.jpg` / `after-3..5.jpg` (still on
-  disk, just unreferenced in `site.ts`) before reprocessing from
-  `~/Desktop/lawncare` again.
+  (`project-1/`, `project-2/`, `project-3/` — both lawncare entries
+  share the `project-3/` folder, just different `n` ranges). Lawncare
+  captions are intentionally simple ("Lawncare — Mow, Edge & Blow" on
+  every photo) per the user's request — unlike the other two
+  projects, don't add descriptive per-photo captions here without
+  being asked.
+  `project-3/before-3.jpg`/`after-3.jpg` (the boulevard-strip pair,
+  originally part of house 1) are still on disk but currently
+  unreferenced in `site.ts` — leave them alone unless asked to bring
+  that pair back.
   Comparison is side-by-side static photos (before, then after with a
   2px accent-color border) — an interactive drag-to-reveal slider was
   tried first but swapped back out since the target audience skews

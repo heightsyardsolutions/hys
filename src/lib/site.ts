@@ -150,25 +150,10 @@ export const projects = [
   },
   {
     title: "Lawncare — Mow, Edge & Blow Service",
-    pairs: [1, 2, 3].map((n) => ({
+    pairs: [1, 2].map((n) => ({
       before: `/images/projects/project-3/before-${n}.jpg`,
       after: `/images/projects/project-3/after-${n}.jpg`,
-      caption: [
-        "Front Lawn — Mowed & Edged",
-        "Curb Lawn — Mowed & Edged",
-        "Boulevard Strip — Mowed & Cleaned Up",
-      ][n - 1],
-    })),
-  },
-  {
-    title: "Lawncare — Mow, Edge & Flower Bed Trim",
-    pairs: [4, 5].map((n) => ({
-      before: `/images/projects/project-3/before-${n}.jpg`,
-      after: `/images/projects/project-3/after-${n}.jpg`,
-      caption: [
-        "Front Yard — Mowed & Edged",
-        "Flower Bed Border — Mowed & Trimmed",
-      ][n - 4],
+      caption: "Lawncare — Mow, Edge & Blow",
     })),
   },
 ] as const;

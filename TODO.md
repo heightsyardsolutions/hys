@@ -1,11 +1,13 @@
 # Heights Yard Solutions — Project Status
 
-Last updated: 2026-08-26
+Last updated: 2026-08-28
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion + Lenis
 (smooth scroll). Single-page marketing site for a landscaping business
-(Ayhem & Patrick, co-owners). Repo: https://github.com/heightsyardsolutions/hys
-(pushed to `main`, up to date as of this file).
+(Haider & Patrick, co-owners — note: was briefly called "Ayhem" in one
+session, corrected back to "Haider"). Repo:
+https://github.com/heightsyardsolutions/hys (pushed to `main`, up to
+date as of this file).
 
 **Live**: https://www.heightsyardsolutions.com — connected to Vercel,
 auto-deploys from `main` on push. Verified (2026-08-22) that the live site
@@ -28,11 +30,17 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Hero**: headline + subtext + CTA, parallax background image, and a
   compact "Get A Quote" form embedded top-right (same fields/logic as the
   full estimate form, via shared `EstimateFormFields.tsx`).
-- **Gallery**: two separately titled projects ("Star Black Rock &
-  Slate Retaining Wall Revamp" — 6 pairs, and "Garden Flower Bed
-  Installation — Marble White Rock & Rubber Mulch" — 5 pairs), each in
-  its own subfolder under `public/images/projects/` (`project-1/`,
-  `project-2/`) and its own carousel with dots/arrows/auto-advance.
+- **Gallery**: three separately titled projects — "Star Black Rock &
+  Slate Retaining Wall Revamp" (6 pairs), "Garden Flower Bed
+  Installation — Marble White Rock & Rubber Mulch" (5 pairs), and
+  "Lawncare — Mow, Edge & Blow Service" (3 pairs) — each in its own
+  subfolder under `public/images/projects/` (`project-1/`, `project-2/`,
+  `project-3/`) and its own carousel with dots/arrows/auto-advance.
+  For project-3, the source photos had no clean before/after numbering
+  — pairing was determined by matching camera framing + cross-checking
+  EXIF capture timestamps (paired shots taken seconds apart; before vs
+  after batches ~15–50 min apart). 3 of the 9 source photos had no
+  confident match and were left out rather than guessed.
   Comparison is side-by-side static photos (before, then after with a
   2px accent-color border) — an interactive drag-to-reveal slider was
   tried first but swapped back out since the target audience skews
@@ -42,7 +50,7 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   below on why that took multiple passes the first time. Data lives in
   `projects` in `src/lib/site.ts` — add a new project by adding photos
   to a new `project-N/` folder and a new entry to that array.
-- **Team**: Ayhem & Patrick, hand-illustrated SVG avatars (not photos),
+- **Team**: Haider & Patrick, hand-illustrated SVG avatars (not photos),
   short bios, framed as equal co-owners (no origin-story detail per the
   user's request).
 - **Services**: single unified catalog, 4 categories (Lawncare,
@@ -63,7 +71,11 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   proper idle/loading/sent/error UI states. **Needs `RESEND_API_KEY` set
   in Vercel to actually work in production — see "Needs attention" #1,
   this is currently blocking.**
-- **Reviews section**: Google and Yelp buttons, both verified as *direct
+- **Reviews section**: all 18 real reviews from the Google Business
+  Profile (`customerReviews` in `site.ts`), paginated 6-per-page (3
+  pages) with dot/arrow nav — a static grid of all 18 was too long, so
+  it follows the same carousel pattern as the gallery. Below that, a
+  CTA card with Google and Yelp buttons, both verified as *direct
   write-a-review links* (not just business search pages) — see URLs in
   `site.ts` (`googleReviewUrl`, `yelpReviewUrl`).
 - **Contact section**: call, email split into Residential (live) and
@@ -157,3 +169,25 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   resolved them. Type-check (`npx tsc --noEmit`) and lint
   (`npx next lint`) are the reliable signal for whether code is actually
   broken; a dev-server error alone isn't proof.
+- **Never run two `next dev` processes against the same project
+  directory at once** (e.g. two Claude sessions both working on this
+  repo), even on different ports — they share the same `.next` build
+  cache and WILL corrupt it (webpack "ENOENT ... rename ... pack.gz"
+  errors, one or both servers going unresponsive). If a second dev
+  server is genuinely needed at the same time, give it an isolated
+  build output by temporarily setting `distDir: ".next-verify"` in
+  `next.config.mjs` before starting it (Next.js re-reads config only at
+  startup, so this is safe to change while another `next dev` is
+  already running) — just remember to `git checkout -- next.config.mjs
+  tsconfig.json` and delete the temp dir afterward, since Next.js also
+  auto-appends the new dir to `tsconfig.json`'s `include`.
+- **Framer Motion `AnimatePresence` + a backgrounded/hidden browser tab
+  = state updates that appear to "not work."** Browsers throttle
+  `requestAnimationFrame` for hidden tabs, and `AnimatePresence` (with
+  `mode="wait"`) waits for the exit animation to finish before mounting
+  the next state — if the tab is hidden when you click something, the
+  DOM can look stuck on the old content even though the underlying
+  React state changed correctly. Don't conclude a click handler is
+  broken from one immediate DOM check; wait a beat (or check again in a
+  separate tool call) before assuming it's a real bug — this cost real
+  time diagnosing the (working) review-pagination carousel.

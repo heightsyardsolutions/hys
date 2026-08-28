@@ -13,6 +13,54 @@ export const site = {
 
 export const customerReviews = [
   {
+    name: "zeze dilly",
+    text: "I highly recommend Haidar and Patrick for any landscaping needs. They recently completed a project at my home and did a fantastic job. Their attention to detail and professionalism were excellent, and I am very pleased with the final…",
+  },
+  {
+    name: "Hector Torres",
+    text: "Very professional and cute and kind and sweet and friendly",
+  },
+  {
+    name: "layla w.",
+    text: "Wonderful service with no mishaps and none of the work is lazily done.",
+  },
+  {
+    name: "brenda henderson",
+    text: "Excellent customer service. Great pricing very professional.",
+  },
+  {
+    name: "Anshika Sharma",
+    text: "great service!",
+  },
+  {
+    name: "lil dessi",
+    text: "Great landscaping company! They did an excellent job and really took their time to make everything look clean, neat, and well-maintained. The work was done professionally, and I'm very happy with how everything looks. I definitely recommend them if you're looking for quality landscaping work!",
+  },
+  {
+    name: "chapis so based",
+    text: "Amazing service from the start to finish! They did an excellent job with our landscaping and you can tell how hardworking and dedicated they are. Great communication, progessional service, and the results look AMAZING, I highly recommend them!!🙌🏻",
+  },
+  {
+    name: "Isha Musse",
+    text: "I've seen examples of their work, and the quality looks excellent. The attention to detail really stands out, and I'd feel comfortable recommending them to others.",
+  },
+  {
+    name: "Arelle",
+    text: "Amazing work",
+  },
+  {
+    name: "danh le",
+    text: "Looks very clean and affordable prices",
+  },
+  {
+    name: "Aminah Rashid",
+    text: "Great price, fast turnaround, and such friendly service. They helped make my home a home!",
+  },
+  {
+    name: "wys",
+    text: "Great work!",
+  },
+  {
     name: "Rustam Sadiqi",
     text: "Very well done! Very respectful people and took care of my front yard very well! I will definitely call them again for fixing the yards 💯!",
   },
@@ -35,10 +83,6 @@ export const customerReviews = [
   {
     name: "Ahmed Ramouni",
     text: "Great service! They did an excellent job cutting my lawn, were quick and professional, and left everything looking clean. Highly recommend!",
-  },
-  {
-    name: "Adam Moha",
-    text: null,
   },
 ] as const;
 
@@ -101,6 +145,18 @@ export const projects = [
         "Evergreen Bed — Marble White Rock Install",
         "Porch Bed — Marble White Rock Install",
         "Arborvitae Bed — Marble White Rock Install",
+      ][n - 1],
+    })),
+  },
+  {
+    title: "Lawncare — Mow, Edge & Blow Service",
+    pairs: [1, 2, 3].map((n) => ({
+      before: `/images/projects/project-3/before-${n}.jpg`,
+      after: `/images/projects/project-3/after-${n}.jpg`,
+      caption: [
+        "Front Lawn — Mowed & Edged",
+        "Curb Lawn — Mowed & Edged",
+        "Boulevard Strip — Mowed & Cleaned Up",
       ][n - 1],
     })),
   },

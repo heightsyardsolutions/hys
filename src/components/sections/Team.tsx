@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { PatrickAvatar, AyhemAvatar } from "@/components/icons/TeamAvatars";
+import { PatrickAvatar, HaiderAvatar } from "@/components/icons/TeamAvatars";
 
 const team = [
   {
-    name: "Ayhem",
+    name: "Haider",
     role: "Co-Owner",
-    Avatar: AyhemAvatar,
-    bio: "Hands-on with every crew, Ayhem keeps jobs moving with an eye for clean lines and hard, honest work.",
+    Avatar: HaiderAvatar,
+    bio: "Hands-on with every crew, Haider keeps jobs moving with an eye for clean lines and hard, honest work.",
   },
   {
     name: "Patrick",
@@ -43,7 +43,7 @@ export default function Team() {
             Meet The Team
           </p>
           <h2 className="mx-auto max-w-2xl font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-white sm:text-5xl">
-            Ayhem &amp; Patrick
+            Haider &amp; Patrick
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/60">
             A hardworking team that shows up on time, every time, and works

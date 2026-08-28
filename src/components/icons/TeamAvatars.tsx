@@ -41,7 +41,7 @@ export function PatrickAvatar(props: AvatarProps) {
   );
 }
 
-export function AyhemAvatar(props: AvatarProps) {
+export function HaiderAvatar(props: AvatarProps) {
   return (
     <svg viewBox="0 0 200 200" {...props}>
       <circle cx="100" cy="100" r="100" fill="#181818" />

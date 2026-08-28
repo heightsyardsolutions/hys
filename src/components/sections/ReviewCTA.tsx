@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { site, customerReviews } from "@/lib/site";
 
 function StarIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -10,6 +11,12 @@ function StarIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+const PAGE_SIZE = 6;
+const pages = Array.from(
+  { length: Math.ceil(customerReviews.length / PAGE_SIZE) },
+  (_, i) => customerReviews.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
+);
 
 const container = {
   hidden: {},
@@ -22,6 +29,12 @@ const item = {
 };
 
 export default function ReviewCTA() {
+  const [page, setPage] = useState(0);
+  const totalPages = pages.length;
+
+  const next = () => setPage((p) => (p + 1) % totalPages);
+  const prev = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+
   return (
     <section className="flex min-h-[100svh] w-full flex-col justify-center border-t border-white/10 bg-ink px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto w-full max-w-6xl">
@@ -38,46 +51,90 @@ export default function ReviewCTA() {
             ))}
           </div>
           <p className="mt-4 font-heading text-sm font-semibold uppercase tracking-[0.3em] text-volt">
-            5-Star Rated
+            5-Star Rated · {customerReviews.length} Reviews
           </p>
           <h2 className="mx-auto max-w-2xl font-heading text-4xl font-bold uppercase leading-tight tracking-tight text-white sm:text-5xl">
             What Our Customers Say
           </h2>
         </motion.div>
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {customerReviews.map((review) => (
+        <div className="mt-14">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={review.name}
-              variants={item}
-              className="flex flex-col border border-white/10 bg-ink-950 p-6 transition-colors duration-300 hover:border-volt/30"
+              key={page}
+              variants={container}
+              initial="hidden"
+              animate="show"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
             >
-              <div className="flex gap-1 text-volt">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <StarIcon key={i} className="h-4 w-4" />
+              {pages[page].map((review) => (
+                <motion.div
+                  key={review.name}
+                  variants={item}
+                  className="flex flex-col border border-white/10 bg-ink-950 p-6 transition-colors duration-300 hover:border-volt/30"
+                >
+                  <div className="flex gap-1 text-volt">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <StarIcon key={i} className="h-4 w-4" />
+                    ))}
+                  </div>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-white/70">
+                    {review.text ? (
+                      <>&ldquo;{review.text}&rdquo;</>
+                    ) : (
+                      <span className="italic text-white/40">
+                        Left a 5-star rating, no written review.
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-5 font-heading text-sm font-semibold uppercase tracking-wide text-white">
+                    {review.name}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {totalPages > 1 && (
+            <div className="mt-8 flex items-center justify-center gap-6">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous reviews"
+                className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 text-white transition-colors hover:border-volt hover:text-volt"
+              >
+                <span aria-hidden="true">&larr;</span>
+              </button>
+
+              <div className="flex items-center gap-2.5">
+                {pages.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setPage(i)}
+                    aria-label={`Show reviews page ${i + 1}`}
+                    className={`h-2 transition-all duration-300 ${
+                      i === page
+                        ? "w-6 bg-volt"
+                        : "w-2 bg-white/25 hover:bg-white/50"
+                    }`}
+                  />
                 ))}
               </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-white/70">
-                {review.text ? (
-                  <>&ldquo;{review.text}&rdquo;</>
-                ) : (
-                  <span className="italic text-white/40">
-                    Left a 5-star rating, no written review.
-                  </span>
-                )}
-              </p>
-              <p className="mt-5 font-heading text-sm font-semibold uppercase tracking-wide text-white">
-                {review.name}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next reviews"
+                className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/15 text-white transition-colors hover:border-volt hover:text-volt"
+              >
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+          )}
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}

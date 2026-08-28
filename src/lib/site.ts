@@ -156,6 +156,14 @@ export const projects = [
       caption: "Lawncare — Mow, Edge & Blow",
     })),
   },
+  {
+    title: "Lawncare — Mow, Edge & Flower Bed Trim",
+    pairs: [4, 5].map((n) => ({
+      before: `/images/projects/project-3/before-${n}.jpg`,
+      after: `/images/projects/project-3/after-${n}.jpg`,
+      caption: "Lawncare — Mow, Edge & Blow",
+    })),
+  },
 ] as const;
 
 export const estimateCategoryGroups = [

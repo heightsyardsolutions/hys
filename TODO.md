@@ -30,22 +30,23 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 - **Hero**: headline + subtext + CTA, parallax background image, and a
   compact "Get A Quote" form embedded top-right (same fields/logic as the
   full estimate form, via shared `EstimateFormFields.tsx`).
-- **Gallery**: four separately titled projects — "Star Black Rock &
+- **Gallery**: three separately titled projects — "Star Black Rock &
   Slate Retaining Wall Revamp" (6 pairs), "Garden Flower Bed
-  Installation — Marble White Rock & Rubber Mulch" (5 pairs),
-  "Lawncare — Mow, Edge & Blow Service" (3 pairs), and "Lawncare —
-  Mow, Edge & Flower Bed Trim" (2 pairs) — the two lawncare entries
-  are two different houses, both sourced from the same `project-3/`
-  photo folder (`projects` in `site.ts` just slices different `n`
-  ranges from the same folder into two entries — the folder itself
-  isn't split by house). Each project has its own carousel with
-  dots/arrows/auto-advance, in its own subfolder under
-  `public/images/projects/` (`project-1/`, `project-2/`, `project-3/`).
-  For project-3, the source photos had no clean before/after numbering
-  — pairing was determined by matching camera framing + cross-checking
-  EXIF capture timestamps (paired shots taken seconds apart; before vs
-  after batches ~15–50 min apart). 3 of the 9 source photos had no
-  confident match and were left out rather than guessed.
+  Installation — Marble White Rock & Rubber Mulch" (5 pairs), and
+  "Lawncare — Mow, Edge & Blow Service" (2 pairs, front + curb lawn
+  only). Each project has its own carousel with dots/arrows/
+  auto-advance, in its own subfolder under `public/images/projects/`
+  (`project-1/`, `project-2/`, `project-3/`). Lawncare captions are
+  intentionally simple ("Lawncare — Mow, Edge & Blow" on every photo)
+  per the user's request — unlike the other two projects, don't add
+  descriptive per-photo captions here without being asked.
+  **A second lawncare house was built (3 more pairs, correctly
+  matched by EXIF timestamp + framing) then removed at the user's
+  request** — they want to swap in different photos for that slot.
+  If asked to add a second lawncare property, check whether they
+  still have `project-3/before-3..5.jpg` / `after-3..5.jpg` (still on
+  disk, just unreferenced in `site.ts`) before reprocessing from
+  `~/Desktop/lawncare` again.
   Comparison is side-by-side static photos (before, then after with a
   2px accent-color border) — an interactive drag-to-reveal slider was
   tried first but swapped back out since the target audience skews

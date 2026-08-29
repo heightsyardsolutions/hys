@@ -18,10 +18,10 @@ import FloatingCallButton from "@/components/layout/FloatingCallButton";
 
 const PANEL_COMPONENTS = [
   Hero,
-  ProjectShowcase,
   Team,
   Services,
   GardeningShowcase,
+  ProjectShowcase,
   EstimateForm,
   ReviewCTA,
   Contact,

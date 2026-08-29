@@ -56,36 +56,39 @@ export default function ScrollExperience() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    // Scan-line just below the fixed nav — whichever panel currently spans
+    // this point in the document is the "active" one. Position-based
+    // rather than IntersectionObserver-ratio-based on purpose: panels vary
+    // a lot in height (some barely taller than the viewport, others much
+    // taller), so comparing intersectionRatio across them isn't reliable,
+    // and the observer's per-batch "best of this event" logic can leave a
+    // section that's exiting alone in a batch and get it picked as active
+    // just because nothing else was there to outrank it.
+    const NAV_OFFSET = 96;
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let best: { id: string; ratio: number } | null = null;
-        for (const entry of entries) {
-          const id = (entry.target as HTMLElement).dataset.panelId;
-          if (!id) continue;
-          if (
-            entry.isIntersecting &&
-            (!best || entry.intersectionRatio > best.ratio)
-          ) {
-            best = { id, ratio: entry.intersectionRatio };
-          }
+    const updateScrollState = () => {
+      setScrolled(window.scrollY > 40);
+
+      let currentId: string = panels[0].id;
+      for (const panel of panels) {
+        const el = panelRefs.current[panel.id];
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= NAV_OFFSET && rect.bottom > NAV_OFFSET) {
+          currentId = panel.id;
+          break;
         }
-        if (best) setActive(best.id);
-      },
-      { threshold: [0.3, 0.5, 0.7] },
-    );
+      }
+      setActive(currentId);
+    };
 
-    Object.values(panelRefs.current).forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+    return () => {
+      window.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
   }, []);
 
   const goToPanel = (id: PanelId) => {

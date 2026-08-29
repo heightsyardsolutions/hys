@@ -137,6 +137,7 @@ export const gardeningShowcase = [
 export const projects = [
   {
     title: "Star Black Rock & Slate Retaining Wall Revamp",
+    review: null,
     pairs: [1, 2, 3, 4, 5, 6].map((n) => ({
       before: `/images/projects/project-1/before-${n}.jpg`,
       after: `/images/projects/project-1/after-${n}.jpg`,
@@ -152,6 +153,10 @@ export const projects = [
   },
   {
     title: "Garden Flower Bed Installation — Marble White Rock & Rubber Mulch",
+    review: {
+      name: "zeze dilly",
+      text: "I highly recommend Haidar and Patrick for any landscaping needs. They recently completed a project at my home and did a fantastic job. Their attention to detail and professionalism were excellent, and I am very pleased with the final…",
+    },
     pairs: [1, 2, 3, 4, 5].map((n) => ({
       before: `/images/projects/project-2/before-${n}.jpg`,
       after: `/images/projects/project-2/after-${n}.jpg`,
@@ -166,6 +171,7 @@ export const projects = [
   },
   {
     title: "Lawncare — Mow, Edge & Blow Service",
+    review: null,
     pairs: [1, 2].map((n) => ({
       before: `/images/projects/project-3/before-${n}.jpg`,
       after: `/images/projects/project-3/after-${n}.jpg`,
@@ -174,6 +180,7 @@ export const projects = [
   },
   {
     title: "Lawncare — Mow, Edge & Flower Bed Trim",
+    review: null,
     pairs: [4, 5].map((n) => ({
       before: `/images/projects/project-3/before-${n}.jpg`,
       after: `/images/projects/project-3/after-${n}.jpg`,

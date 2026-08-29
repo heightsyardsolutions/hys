@@ -7,6 +7,14 @@ import { projects } from "@/lib/site";
 
 type Project = (typeof projects)[number];
 
+function StarIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M12 2.5l2.85 6.32 6.9.68-5.2 4.68 1.55 6.82L12 17.77l-6.1 3.23 1.55-6.82-5.2-4.68 6.9-.68L12 2.5z" />
+    </svg>
+  );
+}
+
 function ProjectCarousel({ project }: { project: Project }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -36,6 +44,22 @@ function ProjectCarousel({ project }: { project: Project }) {
       <h3 className="font-heading text-2xl font-bold uppercase tracking-tight text-white sm:text-3xl">
         {project.title}
       </h3>
+
+      {project.review && (
+        <div className="mx-auto mt-5 max-w-lg border border-white/10 bg-ink px-6 py-5 text-left">
+          <div className="flex gap-1 text-volt">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <StarIcon key={i} className="h-4 w-4" />
+            ))}
+          </div>
+          <p className="mt-3 text-sm italic leading-relaxed text-white/70">
+            &ldquo;{project.review.text}&rdquo;
+          </p>
+          <p className="mt-3 font-heading text-xs font-semibold uppercase tracking-widest text-white">
+            — {project.review.name}, Verified Customer
+          </p>
+        </div>
+      )}
 
       <div className="mt-6 mx-auto max-w-4xl">
         <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">

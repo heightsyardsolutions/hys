@@ -122,15 +122,15 @@ export const serviceCategories = [
 export const gardeningShowcase = [
   {
     image: "/images/gardening/planting-1.jpg",
-    caption: "Fresh Planting Bed — Marble White Rock",
+    caption: "Fresh Planting Bed",
   },
   {
     image: "/images/gardening/planting-2.jpg",
-    caption: "Perennial Planting — Marble White Rock",
+    caption: "Perennial Planting",
   },
   {
     image: "/images/gardening/planting-3.jpg",
-    caption: "Arborvitae Planting — Marble White Rock",
+    caption: "Arborvitae Planting",
   },
 ] as const;
 

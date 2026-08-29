@@ -1,6 +1,6 @@
 # Heights Yard Solutions — Project Status
 
-Last updated: 2026-08-28
+Last updated: 2026-08-29
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion + Lenis
 (smooth scroll). Single-page marketing site for a landscaping business
@@ -67,7 +67,21 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   estimate form's category dropdown, `estimateCategoryGroups`, is derived
   from) — so adding/renaming a service only needs one edit, but if you
   add an item make sure it's reflected in the description text too since
-  those aren't auto-generated from each other.
+  those aren't auto-generated from each other. "Flower & Shrub Planting"
+  was added as an item under Landscaping to back the new Gardening
+  showcase section below.
+- **Gardening & Planting showcase** (`GardeningShowcase.tsx`, between
+  Services and Estimate, nav label "Planting"): a 3-photo grid, not a
+  before/after carousel — the source folder
+  (`~/Desktop/Gardening:Planting`, note the literal colon in the
+  folder name) was mostly mid-installation documentation shots (tools,
+  soil bags, tarps visible), not clean finished photos, so only the 3
+  strongest were used. Two of those three were cropped tighter to cut
+  background clutter, and all three got a subtle sharp-based color
+  grade (`modulate` + `linear` + `sharpen`) for a more polished, unified
+  look — see the git log for the exact processing script if more
+  photos need the same treatment later. Data is `gardeningShowcase` in
+  `site.ts`, images in `public/images/gardening/`.
 - **Estimate form** (`EstimateFormFields.tsx`, used by both the hero card
   and the full `EstimateForm` section): name, phone, optional email,
   category select, optional measurements (for linear-foot-priced work),

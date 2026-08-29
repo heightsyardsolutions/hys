@@ -91,7 +91,7 @@ export const serviceCategories = [
     name: "Lawncare",
     description:
       "Weekly mowing on a schedule you can count on, precise edging along walkways and beds, and a full blow-down when we're done — so your lawn stays sharp and consistent all season, not just after we leave.",
-    items: ["Mow", "Edge", "Blow"],
+    items: ["Mow, Edge & Blow"],
   },
   {
     name: "Landscaping",

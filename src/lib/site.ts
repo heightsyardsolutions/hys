@@ -96,11 +96,12 @@ export const serviceCategories = [
   {
     name: "Landscaping",
     description:
-      "From walkway installation and solar lighting to fresh rock beds and custom outdoor fire pits, we handle the bigger installs that actually reshape how your property looks and lives.",
+      "From walkway installation and solar lighting to fresh rock beds, new flower and shrub planting, and custom outdoor fire pits, we handle the bigger installs that actually reshape how your property looks and lives.",
     items: [
       "Walkway Installation",
       "Solar Lighting Installation",
       "New Rock Installation",
+      "Flower & Shrub Planting",
       "Outdoor Custom Firepits Installation",
     ],
   },
@@ -115,6 +116,21 @@ export const serviceCategories = [
     description:
       "Seasonal raking, leaf shredding, and a thorough blow-out to clear everything else behind — the difference between a yard that's mowed and a yard that actually looks finished.",
     items: ["Raking", "Leaf Shredding", "Blowing"],
+  },
+] as const;
+
+export const gardeningShowcase = [
+  {
+    image: "/images/gardening/planting-1.jpg",
+    caption: "Fresh Planting Bed — Marble White Rock",
+  },
+  {
+    image: "/images/gardening/planting-2.jpg",
+    caption: "Perennial Planting — Marble White Rock",
+  },
+  {
+    image: "/images/gardening/planting-3.jpg",
+    caption: "Arborvitae Planting — Marble White Rock",
   },
 ] as const;
 

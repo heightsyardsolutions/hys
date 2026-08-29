@@ -3,6 +3,7 @@ export const panels = [
   { id: "gallery", label: "Gallery" },
   { id: "team", label: "Team" },
   { id: "services", label: "Services" },
+  { id: "planting", label: "Planting" },
   { id: "estimate", label: "Estimate" },
   { id: "reviews", label: "Reviews" },
   { id: "contact", label: "Contact" },

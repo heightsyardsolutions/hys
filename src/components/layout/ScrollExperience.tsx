@@ -10,6 +10,7 @@ import Hero from "@/components/sections/Hero";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
 import Team from "@/components/sections/Team";
 import Services from "@/components/sections/Services";
+import GardeningShowcase from "@/components/sections/GardeningShowcase";
 import EstimateForm from "@/components/sections/EstimateForm";
 import ReviewCTA from "@/components/sections/ReviewCTA";
 import Contact from "@/components/sections/Contact";
@@ -20,6 +21,7 @@ const PANEL_COMPONENTS = [
   ProjectShowcase,
   Team,
   Services,
+  GardeningShowcase,
   EstimateForm,
   ReviewCTA,
   Contact,
@@ -120,7 +122,7 @@ export default function ScrollExperience() {
           />
         </button>
 
-        <div className="hidden items-center gap-5 xl:flex">
+        <div className="hidden items-center gap-4 xl:flex">
           {panels.map((panel) => (
             <button
               key={panel.id}

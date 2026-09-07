@@ -1,4 +1,5 @@
 export const GA_MEASUREMENT_ID = "G-2HXY01ESEN";
+export const GTM_CONTAINER_ID = "GTM-53XBZ7VP";
 
 /**
  * Fires a GA4 event via gtag.js. Safe to call even if analytics hasn't

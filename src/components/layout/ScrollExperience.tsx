@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import Image from "next/image";
 import { panels, type PanelId } from "@/lib/panels";
 import { site } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import { ScrollExperienceContext } from "@/lib/scroll-context";
 import Hero from "@/components/sections/Hero";
 import ProjectShowcase from "@/components/sections/ProjectShowcase";
@@ -144,6 +145,7 @@ export default function ScrollExperience() {
         <div className="flex items-center gap-4">
           <a
             href={site.phoneHref}
+            onClick={() => trackEvent("phone_click", { location: "nav" })}
             className="hidden font-heading text-sm font-medium uppercase tracking-widest text-white/80 transition-colors hover:text-volt sm:block"
           >
             {site.phoneDisplay}

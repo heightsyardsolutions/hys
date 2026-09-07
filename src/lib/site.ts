@@ -96,11 +96,12 @@ export const serviceCategories = [
   {
     name: "Landscaping",
     description:
-      "From walkway installation and solar lighting to fresh rock beds, new flower and shrub planting, and custom outdoor fire pits, we handle the bigger installs that actually reshape how your property looks and lives.",
+      "From walkway installation and solar lighting to fresh rock beds, mulch installation, new flower and shrub planting, and custom outdoor fire pits, we handle the bigger installs that actually reshape how your property looks and lives.",
     items: [
       "Walkway Installation",
       "Solar Lighting Installation",
       "New Rock Installation",
+      "Mulch Installation",
       "Flower & Shrub Planting",
       "Outdoor Custom Firepits Installation",
     ],

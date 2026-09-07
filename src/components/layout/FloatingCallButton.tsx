@@ -2,11 +2,13 @@
 
 import { motion } from "framer-motion";
 import { site } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 export default function FloatingCallButton({ hidden }: { hidden: boolean }) {
   return (
     <motion.a
       href={site.phoneHref}
+      onClick={() => trackEvent("phone_click", { location: "floating_button" })}
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: hidden ? 0 : 1,

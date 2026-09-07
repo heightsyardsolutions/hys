@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Oswald, Inter } from "next/font/google";
-import { site } from "@/lib/site";
+import { site, serviceCategories, customerReviews } from "@/lib/site";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -18,9 +20,10 @@ const inter = Inter({
 });
 
 const siteUrl = "https://www.heightsyardsolutions.com";
-const title = "Heights Yard Solutions — Lawn Care & Landscaping in Dearborn Heights, MI";
+const title =
+  "Heights Yard Solutions — Lawn Care, Landscaping & Hardscaping in Dearborn Heights, MI";
 const description =
-  "Professional lawn care, landscaping, and hardscape services in Dearborn Heights & surrounding cities. Family-owned, fully insured, and quoted in person. Schedule your free estimate today.";
+  "Lawn care, landscaping, hardscaping & mulch installation in Dearborn Heights & nearby cities. Family-owned, fully insured — free in-person estimates.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -32,7 +35,11 @@ export const metadata: Metadata = {
   keywords: [
     "landscaping Dearborn Heights",
     "lawn care Dearborn Heights",
+    "hardscaping Dearborn Heights",
+    "mulch installation Michigan",
+    "flower bed installation Michigan",
     "yard cleanup Michigan",
+    "tree and brush removal Michigan",
     "landscaping company near me",
     "hardscape installation Michigan",
     "Heights Yard Solutions",
@@ -94,6 +101,23 @@ const structuredData = {
     "https://www.yelp.com/biz/yKT2s0HIclY0Z843l0yj0Q",
     "https://share.google/nLPO55XwhY9Ka16JH",
   ],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: customerReviews.length,
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: serviceCategories.map((category) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: category.name,
+        description: category.description,
+      },
+    })),
+  },
 };
 
 export default function RootLayout({
@@ -110,6 +134,18 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-ink font-body font-normal text-white antialiased">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         {children}
       </body>
     </html>

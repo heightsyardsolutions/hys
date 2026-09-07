@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { site } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -50,6 +51,7 @@ export default function Contact() {
             <motion.a
               variants={item}
               href={site.phoneHref}
+              onClick={() => trackEvent("phone_click", { location: "contact" })}
               className="group flex items-baseline justify-between border-b border-white/10 pb-5 transition-colors hover:border-volt"
             >
               <span className="font-heading text-sm font-semibold uppercase tracking-widest text-white/50">

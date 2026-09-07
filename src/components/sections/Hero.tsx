@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { site } from "@/lib/site";
 import { useScrollExperience } from "@/lib/scroll-context";
+import { trackEvent } from "@/lib/analytics";
 import HeroEstimateCard from "@/components/sections/HeroEstimateCard";
 
 const container = {
@@ -79,8 +80,9 @@ export default function Hero() {
             variants={item}
             className="mt-6 max-w-xl text-balance text-lg text-white/75 sm:text-xl"
           >
-            From clean-cut lawns to bold landscape builds — we bring the
-            hustle and precision your property deserves.
+            From weekly lawn care to hardscaping, mulch installation, and
+            full landscape transformations — we bring the hustle and
+            precision your property deserves.
           </motion.p>
 
           <motion.div
@@ -102,6 +104,7 @@ export default function Hero() {
             </button>
             <a
               href={site.phoneHref}
+              onClick={() => trackEvent("phone_click", { location: "hero" })}
               className="font-heading text-base font-medium uppercase tracking-wide text-white/85 underline decoration-white/30 decoration-2 underline-offset-8 transition-colors hover:text-volt hover:decoration-volt sm:hidden"
             >
               {site.phoneDisplay}

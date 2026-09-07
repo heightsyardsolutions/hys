@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { estimateCategoryGroups, site } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 const container = {
   hidden: {},
@@ -55,6 +56,10 @@ export default function EstimateFormFields({
       });
 
       if (!res.ok) throw new Error("Request failed");
+      trackEvent("generate_lead", {
+        form_location: compact ? "hero" : "estimate_section",
+        project_category: payload.category,
+      });
       setStatus("sent");
     } catch {
       setStatus("error");

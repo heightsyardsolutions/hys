@@ -92,16 +92,51 @@ export default function ScrollExperience() {
     };
   }, []);
 
-  const goToPanel = (id: PanelId) => {
+  const goToPanel = (id: PanelId, immediate = false) => {
     const el = panelRefs.current[id];
     if (!el) return;
 
+    // Compute and clamp the target ourselves rather than handing Lenis the
+    // element directly — for the last section on the page, Lenis's own
+    // element-offset scrollTo consistently overshot to the very bottom
+    // (clamping against document.body.scrollHeight instead of the actual
+    // max-scrollable range), landing well past the intended target.
+    const rect = el.getBoundingClientRect();
+    const rawTarget = rect.top + window.scrollY - 72;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const target = Math.max(0, Math.min(rawTarget, maxScroll));
+
     if (lenisRef.current) {
-      lenisRef.current.scrollTo(el, { offset: -72, duration: 1.3 });
+      lenisRef.current.scrollTo(target, { duration: 1.3, immediate });
     } else {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scrollTo({ top: target, behavior: immediate ? "auto" : "smooth" });
     }
   };
+
+  useEffect(() => {
+    // Landing on a URL like /#reviews (e.g. from a Google Ads ad group
+    // pointed at a specific section) needs its own handling: the browser's
+    // native hash-scroll-on-load happens before Lenis takes over, and Lenis
+    // doesn't reassert it — so once Lenis initializes, snap to the right
+    // panel ourselves. Deliberately setTimeout-based rather than
+    // requestAnimationFrame: rAF gets throttled/paused indefinitely in a
+    // backgrounded tab (e.g. an ad opened in a new tab the visitor hasn't
+    // switched to yet), which would silently never correct the position.
+    const hash = window.location.hash.replace("#", "");
+    const isValidPanel = panels.some((p) => p.id === hash);
+    if (!isValidPanel) return;
+
+    const correct = () => goToPanel(hash as PanelId, true);
+
+    if (document.readyState === "complete") {
+      const timeout = setTimeout(correct, 50);
+      return () => clearTimeout(timeout);
+    }
+
+    window.addEventListener("load", correct, { once: true });
+    return () => window.removeEventListener("load", correct);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ScrollExperienceContext.Provider value={{ goToPanel }}>

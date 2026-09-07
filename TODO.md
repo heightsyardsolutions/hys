@@ -1,6 +1,6 @@
 # Heights Yard Solutions — Project Status
 
-Last updated: 2026-08-29
+Last updated: 2026-09-07
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion + Lenis
 (smooth scroll). Single-page marketing site for a landscaping business
@@ -112,9 +112,33 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
   a generated 1200×630 `opengraph-image.png` (logo + tagline, matches
   site branding), canonical URL, and `HomeAndConstructionBusiness`
   JSON-LD structured data in `layout.tsx` (phone, email, areaServed,
-  sameAs links to Instagram/Yelp/Google). Verified locally that all of
-  it renders correctly (og:/twitter: tags, valid JSON-LD, robots.txt
-  and sitemap.xml both serve correctly).
+  sameAs links to Instagram/Yelp/Google, `AggregateRating` computed
+  from the 18 on-site reviews, and `hasOfferCatalog` listing all 4
+  service categories — both aimed at richer Google search snippets).
+  Title/description rewritten to naturally name more of the actual
+  services (hardscaping, mulch installation, flower bed installation,
+  tree/brush removal) instead of just "lawn care and landscaping" —
+  "Mulch Installation" was also added as a real bookable Landscaping
+  item so that keyword isn't just decorative copy. Verified locally
+  that all of it renders correctly (og:/twitter: tags, valid JSON-LD,
+  robots.txt and sitemap.xml both serve correctly).
+- **Analytics** (`src/lib/analytics.ts`, wired in `layout.tsx`): both
+  GA4 (gtag.js, measurement ID `G-2HXY01ESEN`) and Google Tag Manager
+  (`GTM-53XBZ7VP`) are live, added in that order across two follow-up
+  messages in the same session — GTM doesn't currently have a GA4
+  config tag inside it, so the two don't double-count; GTM is there
+  so future tags (Google Ads conversions, etc.) can be added purely
+  through its UI with no more code changes. `trackEvent(name, params)`
+  fires `window.gtag('event', ...)` directly (not a raw dataLayer
+  push) and no-ops safely if gtag hasn't loaded. Wired to two
+  conversions: `generate_lead` on successful estimate form submission
+  (both the hero card and the full form, tagged with `form_location`
+  and `project_category`), and `phone_click` on all 4 tel: link
+  locations (nav, hero, floating call button, contact section — each
+  tagged with a `location` param so they're distinguishable in GA4).
+  Verified end-to-end in a live browser that both events land in
+  `dataLayer` with the correct params. **Still needs one manual step
+  in the GA4 UI** — see "Needs attention" below.
 
 ## Needs attention / half-done
 
@@ -138,9 +162,14 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 2. **Commercial email is a placeholder** ("Coming Soon", no address) —
    business hasn't set one up yet. Swap in when they have it
    (`src/components/sections/Contact.tsx`, the second email row).
-3. **No analytics.** Nothing tracks form submissions, button clicks, or
-   traffic yet (no GA4, no Meta Pixel, nothing) — worth adding now that
-   the site is publicly reachable at heightsyardsolutions.com.
+3. **GA4 events are firing but aren't marked as conversions yet** — this
+   is a GA4-dashboard-only step, no code involved: go to
+   analytics.google.com → Admin → Events, find `generate_lead` and
+   `phone_click` in the list (they won't show up until at least one
+   real visitor triggers them — the dev-only testing done in this
+   session doesn't count), and toggle "Mark as conversion" on both.
+   Until that's done the events are tracked but won't show up in GA4's
+   conversion/goal reporting.
 4. **Mobile nav has no menu.** Below the `xl` breakpoint the nav links
    just disappear (only logo + phone + Estimate button remain) — there's
    no hamburger/drawer. Relies on the floating call button + normal
@@ -157,9 +186,10 @@ Local dev: `cd ~/heights-yard-solutions && npm run dev -- -p 3010` (no
 1. **Set `RESEND_API_KEY` in Vercel** (see step-by-step above) — this is
    the only thing standing between the estimate form and actually
    working in production. Everything else about it is done.
-2. **Add analytics** (GA4 is the default choice) now that the site is
-   live and has real SEO groundwork — otherwise there's no way to know
-   whether any of this is working (traffic, form conversion rate, etc).
+2. **Mark `generate_lead` and `phone_click` as conversions in GA4**
+   once real traffic has triggered them at least once (dashboard-only
+   step, see "Needs attention" above) — GA4/GTM are both live and
+   tracking, this is the last piece to make them useful.
 3. **Get final business details from the user**: commercial email
    address (or confirm it's staying "Coming Soon"), and confirm the
    fire-pit scope note above.
